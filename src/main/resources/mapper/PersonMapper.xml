@@ -5,7 +5,7 @@
 <mapper namespace="com.yuri.maven.dao.PersonMapper">
 
 
-    <insert id="insertPerson" parameterType="person" >
+    <insert id="insertPerson" parameterType="person">
         INSERT INTO PERSON(USER_NAME,AGE,MOBILEPHONE)
         VALUES (#{userName},#{age},#{mobilePhone})
     </insert>
@@ -20,13 +20,13 @@
         select * from person
     </select>
 
-    <update id="updatePerson" parameterType="int">
-        UPDATE PERSON SET USERNAME=#{userName},
+    <update id="updatePerson" parameterType="person">
+        UPDATE PERSON SET
         AGE=#{age},
         MOBILEPHONE=#{mobilePhone}
-        WHERE ID=#{id}
+        WHERE user_name=#{username}
     </update>
-    
+
     <delete id="deletePerson">
 
     </delete>
