@@ -6,11 +6,14 @@ import java.util.List;
 
 public interface PersonMapper {
 
-    //void insertPerson(Person person);
+    Integer insertPerson(Person person);
 
-    Person queryById(int id);
+    Person queryById(Integer id);
 
     List<Person> queryAll();
 
-    //void updatePerson(int id);
+    Integer updatePerson(Person person);
+
+    Integer deletePerson(Integer id);
+
 }

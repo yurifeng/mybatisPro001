@@ -5,19 +5,30 @@
 <mapper namespace="com.yuri.maven.dao.PersonMapper">
 
 
-    <!--<insert id="insertPerson" parameterType="pojo.Person">-->
-    <!--INSERT INTO PERSON(ID,USERNAME,AGE,MOBILEPHONE)VALUES (#{id},#{userName},#{age},#{mobilePhone})-->
-    <!--</insert>-->
+    <insert id="insertPerson" parameterType="person" >
+        INSERT INTO PERSON(USER_NAME,AGE,MOBILEPHONE)
+        VALUES (#{userName},#{age},#{mobilePhone})
+    </insert>
 
-    <select id="queryById" parameterType="int" resultType="com.yuri.maven.entity.Person">
+
+    <select id="queryById" parameterType="int" resultType="person" databaseId="mysql">
         SELECT * FROM PERSON WHERE ID=#{id}
     </select>
 
-    <!--<update id="updatePerson">-->
-    <!--UPDATE PERSON SET USERNAME=#{userName},AGE=#{age},MOBILEPHONE=#{mobilePhone} WHERE ID=#{id}-->
-    <!--</update>-->
-    
-    <select id="queryAll" resultType="person">
+
+    <select id="queryAll" resultType="person" databaseId="mysql">
         select * from person
     </select>
+
+    <update id="updatePerson" parameterType="int">
+        UPDATE PERSON SET USERNAME=#{userName},
+        AGE=#{age},
+        MOBILEPHONE=#{mobilePhone}
+        WHERE ID=#{id}
+    </update>
+    
+    <delete id="deletePerson">
+
+    </delete>
+
 </mapper>
