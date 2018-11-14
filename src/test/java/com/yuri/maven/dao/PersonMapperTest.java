@@ -5,7 +5,9 @@ import com.yuri.maven.util.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /***
  * 会为接口自动创建一个代理对象,代理对象去执行CRUD操作
@@ -49,11 +51,12 @@ public class PersonMapperTest {
     @Test
     public void insertPerson() {
         PersonMapper mapper = sqlSession.getMapper(PersonMapper.class);
-        Person p = new Person(7, "Micheal", 30, "743546464");
+        Person p = new Person("JohnCorner", 26, "0xffffff");
         Integer integer = mapper.insertPerson(p);
         sqlSession.commit();
         sqlSession.close();
         System.out.println("已添加{" + integer + "}条记录");
+        System.out.println(p.getId());
     }
 
     /**
@@ -79,5 +82,62 @@ public class PersonMapperTest {
         sqlSession.commit();
         sqlSession.close();
         System.out.println("成功删除记录:" + "{" + integer + "}" + "条");
+    }
+
+    /**
+     * 测试多条件查询记录
+     */
+    @Test
+    public void getPersonByIdAndName() {
+        PersonMapper mapper = sqlSession.getMapper(PersonMapper.class);
+        Person person = mapper.getPersonByIdAndName(6, "htt");
+        System.out.println(person);
+    }
+
+    /**
+     * 用封装的map查询数据
+     */
+    @Test
+    public void getPersonByMap() {
+        PersonMapper mapper = sqlSession.getMapper(PersonMapper.class);
+        Map<String, Object> map = new HashMap<>();
+        map.put("id", 6);
+        map.put("userName", "htt");
+        map.put("tableName", "person");
+        Person person = mapper.getPersonByMap(map);
+        System.out.println(person);
+
+    }
+
+    /**
+     * 测试模糊查询
+     */
+    @Test
+    public void getPersonByUserName() {
+        PersonMapper mapper = sqlSession.getMapper(PersonMapper.class);
+        List<Person> list = mapper.getPersonByUserNameLike("%j%");
+        list.forEach(System.out::println);
+    }
+
+    /**
+     * 测试返回一条记录的map
+     */
+    @Test
+    public void getPersonByIdReturnMap() {
+        PersonMapper mapper = sqlSession.getMapper(PersonMapper.class);
+        Map<String, Object> returnMap = mapper.getPersonByIdReturnMap(3);
+        System.out.println(returnMap);
+    }
+
+
+    /**
+     * 测试返回多条记录的map
+     */
+    @Test
+    public void getPersonByUserNameReturnMap(){
+        PersonMapper mapper = sqlSession.getMapper(PersonMapper.class);
+        Map<Integer, Person> returnMap = mapper.getPersonByUserNameReturnMap("%j%");
+        System.out.println(returnMap);
+
     }
 }

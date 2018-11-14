@@ -11,12 +11,13 @@
     <!--驼峰命名法则,用于因实体类的属性和数据库表名的不对称而导致的查询结果字段为空的问题-->
     <settings>
         <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <setting name="jdbcTypeForNull" value="NULL"/>
     </settings>
 
     <!--结果集的别名-->
     <typeAliases>
-        <!--<typeAlias alias="person" type="com.yuri.maven.entity.Person"/>-->
-        <package name="com.yuri.maven.entity"/>
+        <typeAlias alias="person" type="com.yuri.maven.entity.Person"/>
+        <!--<package name="com.yuri.maven.entity"/>-->
         <!--在扫描包的情况下,使用注解实体类起别名-->
     </typeAliases>
 

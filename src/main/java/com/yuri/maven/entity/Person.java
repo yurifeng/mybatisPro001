@@ -1,8 +1,6 @@
 package com.yuri.maven.entity;
 
-import org.apache.ibatis.type.Alias;
-
-@Alias("person")
+//@Alias("person")
 public class Person {
     private Integer id;
     private String userName;
@@ -14,6 +12,12 @@ public class Person {
 
     public Person(int id, String userName, int age, String mobilePhone) {
         this.id = id;
+        this.userName = userName;
+        this.age = age;
+        this.mobilePhone = mobilePhone;
+    }
+
+    public Person(String userName, Integer age, String mobilePhone) {
         this.userName = userName;
         this.age = age;
         this.mobilePhone = mobilePhone;
