@@ -1,6 +1,5 @@
 package com.yuri.maven.entity;
 
-import lombok.Data;
 import org.apache.ibatis.type.Alias;
 
 @Alias("person")
