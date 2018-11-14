@@ -140,4 +140,26 @@ public class PersonMapperTest {
         System.out.println(returnMap);
 
     }
+
+    /**
+     * 测试返回封装的resultMap
+     */
+    @Test
+    public void getPersonByIdPlus(){
+        PersonMapper mapper = sqlSession.getMapper(PersonMapper.class);
+        Person person = mapper.getPersonByIdPlus(3);
+        System.out.println(person);
+    }
+
+    /**
+     * 测试多表关联的查询的resultMap
+     */
+    @Test
+    public void getPersonAndDept(){
+        PersonMapper mapper = sqlSession.getMapper(PersonMapper.class);
+        Person person = mapper.getPersonAndDept(4);
+        System.out.println(person);
+        System.out.println(person.getDept());
+    }
+
 }

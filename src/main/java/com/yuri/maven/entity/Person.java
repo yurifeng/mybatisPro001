@@ -6,6 +6,8 @@ public class Person {
     private String userName;
     private Integer age;
     private String mobilePhone;
+    private Department dept;
+
 
     public Person() {
     }
@@ -53,6 +55,14 @@ public class Person {
 
     public void setMobilePhone(String mobilePhone) {
         this.mobilePhone = mobilePhone;
+    }
+
+    public Department getDept() {
+        return dept;
+    }
+
+    public void setDept(Department dept) {
+        this.dept = dept;
     }
 
     @Override

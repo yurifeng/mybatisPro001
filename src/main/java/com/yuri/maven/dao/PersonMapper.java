@@ -55,9 +55,26 @@ public interface PersonMapper {
      * 使用注解标识将id作为封装为map的key
      *
      * @param userName
-     * @return
+     * @return Map集合
      */
     @MapKey("id")
     Map<Integer, Person> getPersonByUserNameReturnMap(String userName);
+
+
+    /**
+     * 返回封装的resultMap结果集
+     *
+     * @param id
+     * @return Person
+     */
+    Person getPersonByIdPlus(Integer id);
+
+
+    /**
+     * 返回person关联的departmentName的信息
+     * @param id
+     * @return
+     */
+    Person getPersonAndDept(Integer id);
 
 }

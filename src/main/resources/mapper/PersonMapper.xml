@@ -58,4 +58,55 @@
         select * from person where user_name like #{userName}
     </select>
 
+
+    <!--自定义结果集JavaBean封装规则-->
+    <!--
+        id:使用的别名,用于后面的resultMap
+        type:JavaBean原生类名
+        -->
+    <resultMap id="MyPersonMap" type="person">
+        <!--
+            id:主键
+            result:非主键
+
+            column:数据库表列名
+            property:JavaBean属性
+        -->
+        <id column="id" property="id"/>
+        <result column="user_name" property="userName"/>
+        <result column="age" property="age"/>
+        <result column="mobilePhone" property="mobilePhone"/>
+    </resultMap>
+
+    <!--使用resultMap-->
+    <select id="getPersonByIdPlus" resultMap="MyPersonMap">
+        select * from  person where id=#{id}
+    </select>
+
+
+    <!--多表联合查询,association可以指定联合的JavaBean对象-->
+    <resultMap id="MyPersonLink" type="person">
+        <id column="id" property="id"/>
+        <result column="user_name" property="userName"/>
+        <result column="age" property="age"/>
+        <result column="mobilePhone" property="mobilePhone"/>
+
+        <!--
+            property:JavaBean中的属性
+            javaType:指定的对象它属性的类型
+        -->
+        <association property="dept" javaType="department">
+            <id column="did" property="id"/>
+            <result column="dept_name" property="departmentName"/>
+        </association>
+
+    </resultMap>
+
+    <!--person表和dept表关联查询(一个person对应的dept信息)-->
+    <select id="getPersonAndDept" resultMap="MyPersonLink">
+        select p.id id,p.user_name name,p.age age,p.mobilePhone mobile,d.id did, d.dept_name departmentname from person p , dept d
+        where p.d_id=d.id AND p.id=#{id}
+    </select>
+
+
 </mapper>
