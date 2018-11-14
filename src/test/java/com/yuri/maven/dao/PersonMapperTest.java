@@ -1,14 +1,10 @@
 package com.yuri.maven.dao;
 
 import com.yuri.maven.entity.Person;
-import org.apache.ibatis.io.Resources;
+import com.yuri.maven.util.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Test;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 /***
@@ -16,30 +12,18 @@ import java.util.List;
  */
 public class PersonMapperTest {
 
-
     /**
-     * 返回SqlSession
-     *
-     * @return
-     * @throws IOException
+     * 使用单例模式获取sqlSession
      */
-    public SqlSession getSqlSessionFactory() throws IOException {
-        String resources = "mybatis-config.xml";
-        InputStream inputStream = Resources.getResourceAsStream(resources);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-        SqlSession sqlSession = sqlSessionFactory.openSession();
-        return sqlSession;
-    }
+    SqlSession sqlSession = MyBatisUtil.sqlSession();
 
 
     /**
      * 测试queryById
-     *
-     * @throws IOException
      */
     @Test
-    public void queryById() throws IOException {
-        PersonMapper personMapper = getSqlSessionFactory().getMapper(PersonMapper.class);
+    public void queryById() {
+        PersonMapper personMapper = sqlSession.getMapper(PersonMapper.class);
         Person person = personMapper.queryById(3);
         System.out.println(person);
 
@@ -49,14 +33,11 @@ public class PersonMapperTest {
 
     /**
      * 测试queryAll
-     *
-     * @throws IOException
      */
     @Test
-    public void queryAll() throws IOException {
-        PersonMapper mapper = getSqlSessionFactory().getMapper(PersonMapper.class);
+    public void queryAll() {
+        PersonMapper mapper = sqlSession.getMapper(PersonMapper.class);
         List<Person> personList = mapper.queryAll();
-
         for (Person person : personList) {
             System.out.println(person);
         }
@@ -64,19 +45,39 @@ public class PersonMapperTest {
 
     /**
      * 测试插入insertPerson
-     * @throws IOException
      */
     @Test
-    public void insertPerson() throws IOException {
-        PersonMapper mapper = getSqlSessionFactory().getMapper(PersonMapper.class);
-        Person p = new Person();
-        p.setUserName("AOC");
-        p.setAge(20);
-        p.setMobilePhone("768543543543");
+    public void insertPerson() {
+        PersonMapper mapper = sqlSession.getMapper(PersonMapper.class);
+        Person p = new Person(7, "Micheal", 30, "743546464");
         Integer integer = mapper.insertPerson(p);
-        getSqlSessionFactory().commit();
+        sqlSession.commit();
+        sqlSession.close();
         System.out.println("已添加{" + integer + "}条记录");
+    }
 
+    /**
+     * 测试更新数据
+     */
+    @Test
+    public void updatePerson() {
+        PersonMapper mapper = sqlSession.getMapper(PersonMapper.class);
+        Person p = new Person(6, "htt", 00, "0101010101");
+        Integer integer = mapper.updatePerson(p);
+        sqlSession.commit();
+        sqlSession.close();
+        System.out.println("成功更新记录:" + "{" + integer + "}" + "条");
+    }
 
+    /**
+     * 测试删除数据
+     */
+    @Test
+    public void deletePerson() {
+        PersonMapper mapper = sqlSession.getMapper(PersonMapper.class);
+        Integer integer = mapper.deletePerson(4);
+        sqlSession.commit();
+        sqlSession.close();
+        System.out.println("成功删除记录:" + "{" + integer + "}" + "条");
     }
 }
