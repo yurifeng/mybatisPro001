@@ -134,7 +134,7 @@ public class PersonMapperTest {
      * 测试返回多条记录的map
      */
     @Test
-    public void getPersonByUserNameReturnMap(){
+    public void getPersonByUserNameReturnMap() {
         PersonMapper mapper = sqlSession.getMapper(PersonMapper.class);
         Map<Integer, Person> returnMap = mapper.getPersonByUserNameReturnMap("%j%");
         System.out.println(returnMap);
@@ -145,7 +145,7 @@ public class PersonMapperTest {
      * 测试返回封装的resultMap
      */
     @Test
-    public void getPersonByIdPlus(){
+    public void getPersonByIdPlus() {
         PersonMapper mapper = sqlSession.getMapper(PersonMapper.class);
         Person person = mapper.getPersonByIdPlus(3);
         System.out.println(person);
@@ -155,11 +155,12 @@ public class PersonMapperTest {
      * 测试多表关联的查询的resultMap
      */
     @Test
-    public void getPersonAndDept(){
+    public void getPersonAndDept() {
         PersonMapper mapper = sqlSession.getMapper(PersonMapper.class);
-        Person person = mapper.getPersonAndDept(4);
+        Person person = mapper.getPersonAndDept(3);
         System.out.println(person);
         System.out.println(person.getDept());
+//        System.out.println(person.getDept().getLocation());
     }
 
 }

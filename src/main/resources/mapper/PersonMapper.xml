@@ -59,7 +59,7 @@
     </select>
 
 
-    <!--自定义结果集JavaBean封装规则-->
+    <!--单表自定义结果集JavaBean封装规则-->
     <!--
         id:使用的别名,用于后面的resultMap
         type:JavaBean原生类名
@@ -68,7 +68,6 @@
         <!--
             id:主键
             result:非主键
-
             column:数据库表列名
             property:JavaBean属性
         -->
@@ -98,13 +97,15 @@
         <association property="dept" javaType="department">
             <id column="did" property="id"/>
             <result column="dept_name" property="departmentName"/>
+            <result column="location" property="location"/>
         </association>
 
     </resultMap>
 
     <!--person表和dept表关联查询(一个person对应的dept信息)-->
     <select id="getPersonAndDept" resultMap="MyPersonLink">
-        select p.id id,p.user_name name,p.age age,p.mobilePhone mobile,d.id did, d.dept_name departmentname from person p , dept d
+        select p.id id,p.user_name user_name,p.age age,p.mobilePhone mobilePhone,d.id did, d.dept_name dept_name,d.location location
+        from person p , dept d
         where p.d_id=d.id AND p.id=#{id}
     </select>
 

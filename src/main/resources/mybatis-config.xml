@@ -36,16 +36,17 @@
     </environments>
 
     <!--可以针对不同的数据库,告诉xml中的sql语句用什么数据库的语言来处理-->
-    <databaseIdProvider type="DB_VENDOR">
-        <property name="SQL Server" value="sqlserver"/>
-        <property name="DB2" value="db2"/>
-        <property name="Oracle" value="oracle"/>
-        <property name="MySQL" value="mysql"/>
-    </databaseIdProvider>
+    <!--<databaseIdProvider type="DB_VENDOR">-->
+    <!--<property name="SQL Server" value="sqlserver"/>-->
+    <!--<property name="DB2" value="db2"/>-->
+    <!--<property name="Oracle" value="oracle"/>-->
+    <!--<property name="MySQL" value="mysql"/>-->
+    <!--</databaseIdProvider>-->
 
     <!--指定要映射的xml文件(注册映射到全局配置中)-->
     <mappers>
         <mapper resource="mapper/PersonMapper.xml"/>
+        <mapper resource="mapper/DepartmentMapper.xml"/>
         <!--<mapper class="com.yuri.maven.dao.PersonMapper"/>-->
         <!--<package name="com.yuri.maven.dao"/>-->
     </mappers>

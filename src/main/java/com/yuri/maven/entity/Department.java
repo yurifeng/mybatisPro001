@@ -11,13 +11,23 @@ public class Department {
 
     private Integer id;
     private String departmentName;
+    private String location;
 
-    public Department(Integer id, String departmentName) {
+    public Department(Integer id, String departmentName, String location) {
         this.id = id;
         this.departmentName = departmentName;
+        this.location = location;
     }
 
     public Department() {
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public Integer getId() {
@@ -41,6 +51,7 @@ public class Department {
         return "Department{" +
                 "id=" + id +
                 ", departmentName='" + departmentName + '\'' +
+                ", location='" + location + '\'' +
                 '}';
     }
 }

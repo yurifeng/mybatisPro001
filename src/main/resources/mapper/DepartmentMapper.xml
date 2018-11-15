@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yuri.maven.dao.DepartmentMapper">
+
+    <!--单表映射resultMap(由于数据库列名和JavaBean属性不一致)-->
+    <resultMap id="myDeptMap" type="department">
+        <id column="id" property="id"/>
+        <result column="dept_name" property="departmentName"/>
+        <result column="location" property="location"/>
+
+    </resultMap>
+    <select id="getDeptById" resultMap="myDeptMap">
+        select * from dept where id=#{id}
+    </select>
+
+
+    <!--使用association进行分步查询-->
+    <select id="">
+
+    </select>
+
+</mapper>
