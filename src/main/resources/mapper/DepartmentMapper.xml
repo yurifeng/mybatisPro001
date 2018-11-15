@@ -52,4 +52,9 @@
     </select>
 
 
+    <!--collection多表的关联分步查询-->
+    <select id="getDeptByIdStep" resultMap="">
+
+    </select>
+
 </mapper>

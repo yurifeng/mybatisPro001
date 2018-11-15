@@ -15,5 +15,6 @@ public interface DepartmentMapper {
 
     Department getDeptByIdPlus(Integer id);
 
+    Department getDeptByIdStep(Integer id);
 
 }
