@@ -6,6 +6,10 @@ public class Person {
     private String userName;
     private Integer age;
     private String mobilePhone;
+
+    /**
+     * 一个person对应一个department
+     */
     private Department dept;
 
 

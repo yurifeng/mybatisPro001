@@ -8,10 +8,15 @@
     <!--指引数据库配置的内容-->
     <properties resource="config.properties"></properties>
 
-    <!--使用驼峰命名法则,用于因实体类的属性和数据库表名的不对称而导致的查询结果字段为空的问题-->
+
     <settings>
+        <!--使用驼峰命名法则,用于因实体类的属性和数据库表名的不对称而导致的查询结果字段为空的问题-->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!--如果插入的字段为null,则为null-->
         <setting name="jdbcTypeForNull" value="NULL"/>
+        <!--延迟加载-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="aggressiveLazyLoading" value="false"/>
     </settings>
 
     <!--结果集的别名-->

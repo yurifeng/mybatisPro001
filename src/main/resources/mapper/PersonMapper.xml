@@ -110,4 +110,32 @@
     </select>
 
 
+    <!--使用association进行分布查询
+         1.先按照person的id查询员工信息
+         2.根据person中的d_id查询dept中的信息
+         3.将部门设置到person中
+     -->
+    <resultMap id="MyPersonByStep" type="person">
+        <id column="id" property="id"/>
+        <result column="user_name" property="userName"/>
+        <result column="age" property="age"/>
+        <result column="mobilePhone" property="mobilePhone"/>
+
+        <!--关联的属性dept需要DepartmentMapper.getDeptById的结果-->
+        <!-- association定义关联对象的封装规则
+            select:表明当前属性是调用select指定的方法查出的结果
+            column:指定将哪一列的值传给这个方法
+        -->
+        <association property="dept" select="com.yuri.maven.dao.DepartmentMapper.getDeptById" column="d_id"/>
+    </resultMap>
+
+    <select id="getPersonByIdStep" resultMap="MyPersonByStep">
+        select * from person where id=#{id}
+    </select>
+
+
+    <!--分布查询的延迟加载-->
+
+
+
 </mapper>

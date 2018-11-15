@@ -3,21 +3,53 @@
 
 <mapper namespace="com.yuri.maven.dao.DepartmentMapper">
 
+
     <!--单表映射resultMap(由于数据库列名和JavaBean属性不一致)-->
     <resultMap id="myDeptMap" type="department">
         <id column="id" property="id"/>
         <result column="dept_name" property="departmentName"/>
         <result column="location" property="location"/>
-
     </resultMap>
+
     <select id="getDeptById" resultMap="myDeptMap">
-        select * from dept where id=#{id}
+         select * from dept where id=#{id}
     </select>
 
 
-    <!--使用association进行分步查询-->
-    <select id="">
+    <!--collection多表联合查询-->
+    <resultMap id="MyDeptMap" type="department">
+        <id column="did" property="id"/>
+        <result column="dept_name" property="departmentName"/>
+        <result column="location" property="location"/>
 
+        <!--
+            collection定义集合类型的封装规则
+            ofType:指定集合里面的元素类型
+        -->
+        <collection property="persons" ofType="person">
+            <id column="pid" property="id"/>
+            <result column="user_name" property="userName"/>
+            <result column="age" property="age"/>
+            <result column="mobilePhone" property="mobilePhone"/>
+        </collection>
+    </resultMap>
+
+    <!--collection联合封装查询-->
+    <select id="getDeptByIdPlus" resultMap="MyDeptMap">
+            SELECT
+                d.id did,
+                d.dept_name dept_name,
+                d.location location,
+                p.id pid,
+                p.age age,
+                p.user_name user_name,
+                p.mobilePhone mobilePhone
+            FROM
+                dept d
+            LEFT JOIN person p ON d.id = p.d_id
+            WHERE
+                d.id =#{id}
     </select>
+
 
 </mapper>

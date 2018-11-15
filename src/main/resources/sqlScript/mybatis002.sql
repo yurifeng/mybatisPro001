@@ -32,9 +32,9 @@ CREATE TABLE `dept` (
 INSERT INTO `dept` VALUES ('1', 'Finance', 'Shanghai');
 INSERT INTO `dept` VALUES ('2', 'Human Resource', 'Nanjing');
 INSERT INTO `dept` VALUES ('3', 'General Manager Office', 'Beijing');
-INSERT INTO `dept` VALUES ('4', 'Information Technology', 'Hongkong');
-INSERT INTO `dept` VALUES ('5', 'Marketing', 'TaiWan');
-INSERT INTO `dept` VALUES ('6', 'Sales', 'GuangZhou');
+INSERT INTO `dept` VALUES ('4', 'Information Technology', 'Hong Kong');
+INSERT INTO `dept` VALUES ('5', 'Marketing', 'Taiwan');
+INSERT INTO `dept` VALUES ('6', 'Sales', 'Guangzhou');
 
 -- ----------------------------
 -- Table structure for person

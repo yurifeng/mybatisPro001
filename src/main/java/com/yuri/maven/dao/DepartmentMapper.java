@@ -10,8 +10,10 @@ import com.yuri.maven.entity.Department;
  */
 public interface DepartmentMapper {
 
+
     Department getDeptById(Integer id);
 
+    Department getDeptByIdPlus(Integer id);
 
 
 }

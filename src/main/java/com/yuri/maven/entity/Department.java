@@ -1,5 +1,7 @@
 package com.yuri.maven.entity;
 
+import java.util.List;
+
 /**
  * @author yurifeng
  * @create 2018-11-14 20:59
@@ -13,13 +15,29 @@ public class Department {
     private String departmentName;
     private String location;
 
-    public Department(Integer id, String departmentName, String location) {
+    /**
+     * 一个department对应多个person
+     */
+    private List<Person> persons;
+
+
+
+    public Department(Integer id, String departmentName, String location, List<Person> persons) {
         this.id = id;
         this.departmentName = departmentName;
         this.location = location;
+        this.persons = persons;
     }
 
     public Department() {
+    }
+
+    public List<Person> getPersons() {
+        return persons;
+    }
+
+    public void setPersons(List<Person> persons) {
+        this.persons = persons;
     }
 
     public String getLocation() {
@@ -52,6 +70,7 @@ public class Department {
                 "id=" + id +
                 ", departmentName='" + departmentName + '\'' +
                 ", location='" + location + '\'' +
+                ", persons=" + persons +
                 '}';
     }
 }

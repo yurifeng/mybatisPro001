@@ -78,4 +78,12 @@ public interface PersonMapper {
      */
     Person getPersonAndDept(Integer id);
 
+
+    /**
+     * 分布查询person关联的department信息
+     * @param id
+     * @return
+     */
+    Person getPersonByIdStep(Integer id);
+
 }

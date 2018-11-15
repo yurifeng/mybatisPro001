@@ -160,7 +160,19 @@ public class PersonMapperTest {
         Person person = mapper.getPersonAndDept(3);
         System.out.println(person);
         System.out.println(person.getDept());
-//        System.out.println(person.getDept().getLocation());
+    }
+
+
+    /**
+     * 测试多表关联的association分布查询(添加了懒加载配置策略)
+     */
+    @Test
+    public void getPersonByIdStep() {
+        PersonMapper mapper = sqlSession.getMapper(PersonMapper.class);
+        Person person = mapper.getPersonByIdStep(6);
+        System.out.println(person.getUserName());
+        System.out.println(person.getDept());
+
     }
 
 }
