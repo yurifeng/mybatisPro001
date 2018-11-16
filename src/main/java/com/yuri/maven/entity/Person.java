@@ -16,7 +16,7 @@ public class Person {
     public Person() {
     }
 
-    public Person(int id, String userName, int age, String mobilePhone) {
+    public Person(Integer id, String userName, Integer age, String mobilePhone) {
         this.id = id;
         this.userName = userName;
         this.age = age;
@@ -26,6 +26,20 @@ public class Person {
     public Person(String userName, Integer age, String mobilePhone) {
         this.userName = userName;
         this.age = age;
+        this.mobilePhone = mobilePhone;
+    }
+
+    public Person(String userName, Integer age) {
+        this.userName = userName;
+        this.age = age;
+    }
+
+    public Person(String userName) {
+        this.userName = userName;
+    }
+
+    public Person(String userName, String mobilePhone) {
+        this.userName = userName;
         this.mobilePhone = mobilePhone;
     }
 

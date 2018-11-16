@@ -4,7 +4,6 @@ import com.yuri.maven.entity.Person;
 import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Param;
 
-import java.net.Inet4Address;
 import java.util.List;
 import java.util.Map;
 
@@ -98,12 +97,15 @@ public interface PersonMapper {
 
 
     /**
-     * 测试mybatis鉴别器
+     * 使用mybatis鉴别器
      *
      * @param id
      * @return
      */
     Person getPersonByIdStep2(Integer id);
+
+
+
 
 
 }

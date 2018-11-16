@@ -6,7 +6,7 @@
 <configuration>
 
     <!--指引数据库配置的内容-->
-    <properties resource="config.properties"></properties>
+    <properties resource="dbConfig.properties"></properties>
 
 
     <settings>
@@ -52,6 +52,7 @@
     <mappers>
         <mapper resource="mapper/PersonMapper.xml"/>
         <mapper resource="mapper/DepartmentMapper.xml"/>
+        <mapper resource="mapper/PersonMapperDynamicSQL.xml"/>
         <!--<mapper class="com.yuri.maven.dao.PersonMapper"/>-->
         <!--<package name="com.yuri.maven.dao"/>-->
     </mappers>
