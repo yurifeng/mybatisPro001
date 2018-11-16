@@ -4,6 +4,7 @@ import com.yuri.maven.entity.Person;
 import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Param;
 
+import java.net.Inet4Address;
 import java.util.List;
 import java.util.Map;
 
@@ -73,6 +74,7 @@ public interface PersonMapper {
 
     /**
      * 返回person关联的departmentName的信息
+     *
      * @param id
      * @return
      */
@@ -81,9 +83,27 @@ public interface PersonMapper {
 
     /**
      * 分布查询person关联的department信息
+     *
      * @param id
      * @return
      */
     Person getPersonByIdStep(Integer id);
+
+
+    /**
+     * @param id
+     * @return
+     */
+    List<Person> getPersonsByDeptId(Integer id);
+
+
+    /**
+     * 测试mybatis鉴别器
+     *
+     * @param id
+     * @return
+     */
+    Person getPersonByIdStep2(Integer id);
+
 
 }

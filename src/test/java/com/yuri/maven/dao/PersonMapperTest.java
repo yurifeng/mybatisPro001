@@ -172,7 +172,17 @@ public class PersonMapperTest {
         Person person = mapper.getPersonByIdStep(6);
         System.out.println(person.getUserName());
         System.out.println(person.getDept());
+    }
 
+    /**
+     * 测试discriminator
+     */
+    @Test
+    public void getPersonByIdStep2(){
+        PersonMapper mapper = sqlSession.getMapper(PersonMapper.class);
+        Person personByIdStep2 = mapper.getPersonByIdStep2(1);
+        System.out.println(personByIdStep2);
+        System.out.println(personByIdStep2.getDept());
     }
 
 }

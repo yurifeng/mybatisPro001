@@ -13,8 +13,23 @@ public interface DepartmentMapper {
 
     Department getDeptById(Integer id);
 
+    /**
+     * 通过department关联查询person
+     *
+     * @param id
+     * @return
+     */
     Department getDeptByIdPlus(Integer id);
 
+    /**
+     * 通过department关联分布查询person
+     *
+     * @param id
+     * @return
+     */
     Department getDeptByIdStep(Integer id);
+
+
+
 
 }

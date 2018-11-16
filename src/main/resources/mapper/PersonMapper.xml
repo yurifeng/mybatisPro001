@@ -76,8 +76,6 @@
         <result column="age" property="age"/>
         <result column="mobilePhone" property="mobilePhone"/>
     </resultMap>
-
-    <!--使用resultMap-->
     <select id="getPersonByIdPlus" resultMap="MyPersonMap">
         select * from  person where id=#{id}
     </select>
@@ -89,7 +87,6 @@
         <result column="user_name" property="userName"/>
         <result column="age" property="age"/>
         <result column="mobilePhone" property="mobilePhone"/>
-
         <!--
             property:JavaBean中的属性
             javaType:指定的对象它属性的类型
@@ -110,7 +107,7 @@
     </select>
 
 
-    <!--使用association进行分布查询
+    <!--使用association进行[分步]查询
          1.先按照person的id查询员工信息
          2.根据person中的d_id查询dept中的信息
          3.将部门设置到person中
@@ -120,7 +117,6 @@
         <result column="user_name" property="userName"/>
         <result column="age" property="age"/>
         <result column="mobilePhone" property="mobilePhone"/>
-
         <!--关联的属性dept需要DepartmentMapper.getDeptById的结果-->
         <!-- association定义关联对象的封装规则
             select:表明当前属性是调用select指定的方法查出的结果
@@ -128,14 +124,50 @@
         -->
         <association property="dept" select="com.yuri.maven.dao.DepartmentMapper.getDeptById" column="d_id"/>
     </resultMap>
-
     <select id="getPersonByIdStep" resultMap="MyPersonByStep">
         select * from person where id=#{id}
     </select>
 
 
-    <!--分布查询的延迟加载-->
+    <!--分布查询的延迟加载(department查询分步需要用到该查询)-->
+    <select id="getPersonsByDeptId" resultType="person">
+      select * from person where d_id=#{deptId}
+    </select>
 
+
+    <!--
+        discriminator:鉴别器
+        mybatis可以使用鉴别器判断某列的值,然后根据某列的值改变封装行为
+
+        封装Person:
+                    如果person的age是18岁,则查询部门信息,否则不查询部门信息
+                    如果person的age是12岁,则将user_name赋值给mobilePhone
+    -->
+    <resultMap id="MyPersonDiscriminator" type="person">
+        <id column="id" property="id"/>
+        <result column="user_name" property="userName"/>
+        <result column="age" property="age"/>
+        <result column="mobilePhone" property="mobilePhone"/>
+        <!--
+            column:指定要判断的列名
+            javaType:列值对应的Java类型(如:string,int,bigDecimal)
+        -->
+        <discriminator javaType="int" column="age">
+            <!--resultType:指定的封装的结果的类型[必须]-->
+            <case value="18" resultType="person">
+                <association property="dept" select="com.yuri.maven.dao.DepartmentMapper.getDeptById" column="d_id"/>
+            </case>
+            <case value="12" resultType="person">
+                <id column="id" property="id"/>
+                <result column="user_name" property="userName"/>
+                <result column="age" property="age"/>
+                <result column="user_name" property="mobilePhone"/>
+            </case>
+        </discriminator>
+    </resultMap>
+    <select id="getPersonByIdStep2" resultMap="MyPersonDiscriminator">
+        select * from person where id=#{id}
+    </select>
 
 
 </mapper>

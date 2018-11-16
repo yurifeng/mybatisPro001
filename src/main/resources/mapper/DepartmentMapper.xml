@@ -10,7 +10,6 @@
         <result column="dept_name" property="departmentName"/>
         <result column="location" property="location"/>
     </resultMap>
-
     <select id="getDeptById" resultMap="myDeptMap">
          select * from dept where id=#{id}
     </select>
@@ -18,10 +17,9 @@
 
     <!--collection多表联合查询-->
     <resultMap id="MyDeptMap" type="department">
-        <id column="did" property="id"/>
+        <id column="id" property="id"/>
         <result column="dept_name" property="departmentName"/>
         <result column="location" property="location"/>
-
         <!--
             collection定义集合类型的封装规则
             ofType:指定集合里面的元素类型
@@ -33,11 +31,9 @@
             <result column="mobilePhone" property="mobilePhone"/>
         </collection>
     </resultMap>
-
-    <!--collection联合封装查询-->
     <select id="getDeptByIdPlus" resultMap="MyDeptMap">
             SELECT
-                d.id did,
+                d.id id,
                 d.dept_name dept_name,
                 d.location location,
                 p.id pid,
@@ -52,9 +48,23 @@
     </select>
 
 
-    <!--collection多表的关联分步查询-->
-    <select id="getDeptByIdStep" resultMap="">
-
+    <!--collection多表的关联[分步]查询-->
+    <resultMap id="MyDeptByStep" type="department">
+        <id column="id" property="id"/>
+        <result column="dept_name" property="departmentName"/>
+        <result column="location" property="location"/>
+        <!--
+            传递多列值:将多列值封装map传递
+            column="{key1=column1,key2=column2}"
+            fetchType的值有"lazy"/"eager"(设置此选项,全局加载策略将会无效)
+            discriminator:鉴别器
+        -->
+        <collection property="persons" select="com.yuri.maven.dao.PersonMapper.getPersonsByDeptId"
+                    column="{deptId=id}" fetchType="lazy" />
+    </resultMap>
+    <select id="getDeptByIdStep" resultMap="MyDeptByStep">
+        select * from dept where id=#{id}
     </select>
+
 
 </mapper>

@@ -35,4 +35,16 @@ public class DepartmentMapperTest {
         department.getPersons().forEach(System.out::println);
 
     }
+
+    /**
+     * 测试根据department得出person的分步查询
+     */
+    @Test
+    public void getDeptByIdStep() {
+        DepartmentMapper mapper = sqlSession.getMapper(DepartmentMapper.class);
+        Department department = mapper.getDeptByIdStep(6);
+        System.out.println(department.getDepartmentName());
+        System.out.println(department.getPersons());
+
+    }
 }
