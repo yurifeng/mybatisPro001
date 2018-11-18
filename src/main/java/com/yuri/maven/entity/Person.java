@@ -16,6 +16,9 @@ public class Person {
     public Person() {
     }
 
+    /**
+     * id,userName,age,mobilePhone
+     **/
     public Person(Integer id, String userName, Integer age, String mobilePhone) {
         this.id = id;
         this.userName = userName;
@@ -23,21 +26,33 @@ public class Person {
         this.mobilePhone = mobilePhone;
     }
 
+    /**
+     * userName,age,mobilePhone
+     **/
     public Person(String userName, Integer age, String mobilePhone) {
         this.userName = userName;
         this.age = age;
         this.mobilePhone = mobilePhone;
     }
 
+    /**
+     * userName,age
+     **/
     public Person(String userName, Integer age) {
         this.userName = userName;
         this.age = age;
     }
 
+    /**
+     * userName
+     **/
     public Person(String userName) {
         this.userName = userName;
     }
 
+    /**
+     * userName,mobilePhone
+     **/
     public Person(String userName, String mobilePhone) {
         this.userName = userName;
         this.mobilePhone = mobilePhone;
@@ -90,6 +105,7 @@ public class Person {
                 ", userName='" + userName + '\'' +
                 ", age=" + age +
                 ", mobilePhone='" + mobilePhone + '\'' +
+                ", dept=" + dept +
                 '}';
     }
 }

@@ -157,7 +157,7 @@ public class PersonMapperTest {
     @Test
     public void getPersonAndDept() {
         PersonMapper mapper = sqlSession.getMapper(PersonMapper.class);
-        Person person = mapper.getPersonAndDept(3);
+        Person person = mapper.getPersonAndDept(1);
         System.out.println(person);
         System.out.println(person.getDept());
     }

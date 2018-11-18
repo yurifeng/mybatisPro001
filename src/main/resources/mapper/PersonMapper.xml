@@ -101,9 +101,19 @@
 
     <!--person表和dept表关联查询(一个person对应的dept信息)-->
     <select id="getPersonAndDept" resultMap="MyPersonLink">
-        select p.id id,p.user_name user_name,p.age age,p.mobilePhone mobilePhone,d.id did, d.dept_name dept_name,d.location location
-        from person p , dept d
-        where p.d_id=d.id AND p.id=#{id}
+        select
+              p.id id,
+              p.user_name user_name,
+              p.age age,
+              p.mobilePhone mobilePhone,
+              d.id did,
+              d.dept_name dept_name,
+              d.location location
+        from
+              person p ,
+              dept d
+        where
+              p.d_id=d.id AND p.id=#{id}
     </select>
 
 
@@ -168,6 +178,5 @@
     <select id="getPersonByIdStep2" resultMap="MyPersonDiscriminator">
         select * from person where id=#{id}
     </select>
-
 
 </mapper>

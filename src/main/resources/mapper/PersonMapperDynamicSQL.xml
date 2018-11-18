@@ -9,19 +9,129 @@
         if中test里面的是JavaBean中属性
     -->
     <select id="getPersonByConditionIf" resultType="person">
-        select * from person where
-        <if test="id!=null">
-            id=#{id}
-        </if>
-        <if test="userName!=null and userName!=''">
-            and user_name like #{userName}
-        </if>
-        <if test="age!=null">
-            and age=#{age}
-        </if>
-        <if test="mobilePhone!=null and mobilePhone.trim()!=''">
-            and mobilePhone=#{mobilePhone}
-        </if>
+        select * from person
+        <where>
+            <if test="id!=null">
+                id=#{id}
+            </if>
+            <if test="userName!=null and userName!=''">
+                and user_name like #{userName}
+            </if>
+            <if test="age!=null">
+                and age=#{age}
+            </if>
+            <if test="mobilePhone!=null and mobilePhone.trim()!=''">
+                and mobilePhone=#{mobilePhone}
+            </if>
+        </where>
+    </select>
+
+
+    <!--
+        使用DynamicSQL
+        trim
+    -->
+    <select id="getPersonByConditionTrim" resultType="person">
+        select * from person
+        /*
+        prefix="加前缀"
+        prefixOverrides="完整的sql出来之后,发现前面的指定的字符在,就删除"
+        suffix="加后缀"
+        suffixOverrides="完整的sql出来之后,发现后面的指定的字符在,就删除"
+        */
+        <trim prefix="where" suffixOverrides="and">
+            <if test="id!=null">
+                id=#{id} and
+            </if>
+            <if test="userName!=null and userName!=''">
+                user_name like #{userName} and
+            </if>
+            <if test="age!=null">
+                age=#{age} and
+            </if>
+            <if test="mobilePhone!=null and mobilePhone.trim()!=''">
+                mobilePhone=#{mobilePhone} and
+            </if>
+        </trim>
+    </select>
+
+    <!--
+        使用DynamicSQL
+        choose
+        只能进去一个when里面进行where判断
+    -->
+    <select id="getPersonByConditionChoose" resultType="person">
+        select * from person
+        <where>
+            <choose>
+                <when test="id!=null">
+                    id=#{id}
+                </when>
+                <when test="userName!=null">
+                    user_name like #{userName}
+                </when>
+                <when test="age!=null">
+                    age=#{age}
+                </when>
+                <when test="mobilePhone!=null">
+                    mobilePhone=#{mobilePhone}
+                </when>
+                <otherwise>
+                    1=1
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <!--
+        使用DynamicSQL
+        set/if结合
+    -->
+    <select id="updatePerson" resultType="person">
+        update person
+        /*用set可以删除逗号*/
+        <set>
+            <if test="userName!=null">
+                user_name=#{userName},
+            </if>
+            <if test="age!=null">
+                age=#{age},
+            </if>
+            <if test="mobilePhone!=null">
+                mobilePhone=#{mobilePhone},
+            </if>
+        </set>
+        where id=#{id}
+
+        /*trim标签也可以删除逗号*/
+        <!--update person
+        <trim prefix="set" suffixOverrides=",">
+            <if test="userName!=null">
+                user_name=#{userName},
+            </if>
+            <if test="age!=null">
+                age=#{age},
+            </if>
+            <if test="mobilePhone!=null">
+                mobilePhone=#{mobilePhone},
+            </if>
+        </trim>
+        where id=#{id}-->
+    </select>
+
+
+    <!--
+        使用foreach
+    -->
+    <select id="getPersonByConditionForeach" resultType="person">
+        select * from person
+        /*
+        collection: 就是要遍历的集合
+        item: 元素别名
+        */
+        <foreach collection="ids" item="item_id" separator="," open="where id in (" close=")">
+            #{item_id}
+        </foreach>
     </select>
 
 
