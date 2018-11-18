@@ -1,5 +1,6 @@
 package com.yuri.maven.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  * @projectName mybatisPro001
  **/
 
-public class Department {
+public class Department implements Serializable {
 
     private Integer id;
     private String departmentName;
@@ -19,7 +20,6 @@ public class Department {
      * 一个department对应多个person
      */
     private List<Person> persons;
-
 
 
     public Department(Integer id, String departmentName, String location, List<Person> persons) {

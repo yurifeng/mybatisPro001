@@ -47,4 +47,22 @@ public class DepartmentMapperTest {
         System.out.println(department.getPersons());
 
     }
+
+    /**
+     * 测试二级缓存(SecondLevelCache)
+     */
+    @Test
+    public void testSecondLevelCache() {
+        SqlSession sqlSession1 = MyBatisUtil.sqlSession();
+        SqlSession sqlSession2 = MyBatisUtil.sqlSession();
+
+        DepartmentMapper mapper1 = sqlSession1.getMapper(DepartmentMapper.class);
+        DepartmentMapper mapper2 = sqlSession2.getMapper(DepartmentMapper.class);
+        Department department1 = mapper1.getDeptById(1);
+        System.out.println(department1);
+        sqlSession1.close();
+        Department department2 = mapper2.getDeptById(1);
+        System.out.println(department2);
+        sqlSession2.close();
+    }
 }

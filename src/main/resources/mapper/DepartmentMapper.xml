@@ -2,7 +2,15 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.yuri.maven.dao.DepartmentMapper">
-
+    <!--
+        二级缓存
+        eviction:缓存回收策略
+        flushInterval:缓存刷新时间间隔
+        readOnly:是否只读
+        size:缓存存放多少元素
+        type:指定自定义缓存的全类名
+    -->
+    <cache eviction="FIFO" flushInterval="60000" readOnly="false" size="1024"/>
 
     <!--单表映射resultMap(由于数据库列名和JavaBean属性不一致)-->
     <resultMap id="myDeptMap" type="department">
@@ -60,7 +68,7 @@
             discriminator:鉴别器
         -->
         <collection property="persons" select="com.yuri.maven.dao.PersonMapper.getPersonsByDeptId"
-                    column="{deptId=id}" fetchType="lazy" />
+                    column="{deptId=id}" fetchType="lazy"/>
     </resultMap>
     <select id="getDeptByIdStep" resultMap="MyDeptByStep">
         select * from dept where id=#{id}

@@ -80,8 +80,8 @@ public class PersonMapperDynamicSQLTest {
     public void addPersonsBatch() {
         PersonMapperDynamicSQL mapper = sqlSession.getMapper(PersonMapperDynamicSQL.class);
         List<Person> ps = new ArrayList<>();
-        ps.add(new Person(null, "smith", 66, "!@#$%^&*()_+"));
-        ps.add(new Person(null, "cotana", 444, "ASDFGHJKL"));
+        ps.add(new Person(null, "xxxx", 66, "!@#$%^&*()_+"));
+        ps.add(new Person(null, "zzzz", 444, "ASDFGHJKL"));
         mapper.addPersonsBatch(ps);
         sqlSession.commit();
         sqlSession.close();

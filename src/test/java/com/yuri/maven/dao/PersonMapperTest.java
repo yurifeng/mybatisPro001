@@ -26,11 +26,11 @@ public class PersonMapperTest {
     @Test
     public void queryById() {
         PersonMapper personMapper = sqlSession.getMapper(PersonMapper.class);
-        Person person = personMapper.queryById(3);
+        Person person = personMapper.queryById(10);
         System.out.println(person);
 
         //得到的是代理类型
-        System.out.println(personMapper.getClass());
+        //System.out.println(personMapper.getClass());
     }
 
     /**
@@ -183,6 +183,7 @@ public class PersonMapperTest {
         Person personByIdStep2 = mapper.getPersonByIdStep2(1);
         System.out.println(personByIdStep2);
         System.out.println(personByIdStep2.getDept());
+        System.out.println(personByIdStep2);
     }
 
 

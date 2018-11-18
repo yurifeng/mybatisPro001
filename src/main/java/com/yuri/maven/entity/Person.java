@@ -1,7 +1,16 @@
 package com.yuri.maven.entity;
 
+import java.io.Serializable;
+
+/**
+ * @author yurifeng
+ * @create 2018-11-14 20:59
+ * @packageName com.yuri.maven.entity
+ * @projectName mybatisPro001
+ **/
+
 //@Alias("person")
-public class Person {
+public class Person implements Serializable {
     private Integer id;
     private String userName;
     private Integer age;
