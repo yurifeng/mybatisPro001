@@ -61,6 +61,7 @@
         只能进去一个when里面进行where判断
     -->
     <select id="getPersonByConditionChoose" resultType="person">
+        <bind name="name" value="'%'+userName+'%'"/>
         select * from person
         <where>
             <choose>
@@ -68,7 +69,7 @@
                     id=#{id}
                 </when>
                 <when test="userName!=null">
-                    user_name like #{userName}
+                    user_name like #{name}
                 </when>
                 <when test="age!=null">
                     age=#{age}
@@ -133,6 +134,27 @@
             #{item_id}
         </foreach>
     </select>
+
+
+    <!--
+        foreach批量保存数据
+    -->
+    <insert id="addPersonsBatch">
+        INSERT INTO person (<include refid="insertColumn"/>)
+        VALUES
+        <foreach collection="persons" item="p" separator=",">
+            (#{p.userName},#{p.age},#{p.mobilePhone},#{p.dept.id})
+        </foreach>
+
+    </insert>
+
+
+    <!--
+        sql标签:抽取可以重复使用的sql片段
+    -->
+    <sql id="insertColumn">
+          user_name, age, mobilePhone, d_id
+    </sql>
 
 
 </mapper>

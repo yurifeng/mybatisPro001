@@ -49,4 +49,12 @@ public interface PersonMapperDynamicSQL {
     List<Person> getPersonByConditionForeach(@Param("ids") List<Integer> ids);
 
 
+    /**
+     * 批量添加数据(persons)
+     *
+     * @param persons
+     */
+    void addPersonsBatch(@Param("persons") List<Person> persons);
+
+
 }

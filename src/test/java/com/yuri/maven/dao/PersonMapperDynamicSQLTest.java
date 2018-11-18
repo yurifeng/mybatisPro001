@@ -2,11 +2,10 @@ package com.yuri.maven.dao;
 
 import com.yuri.maven.entity.Person;
 import com.yuri.maven.util.MyBatisUtil;
-import org.apache.ibatis.builder.annotation.MapperAnnotationBuilder;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
-import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -37,7 +36,8 @@ public class PersonMapperDynamicSQLTest {
     @Test
     public void getPersonByConditionTrim() {
         PersonMapperDynamicSQL mapper = sqlSession.getMapper(PersonMapperDynamicSQL.class);
-        Person person = new Person(3, "%j%", null, null);
+        Person person = new Person();
+        person.setUserName("%j%");
         mapper.getPersonByConditionTrim(person).forEach(System.out::println);
     }
 
@@ -47,7 +47,7 @@ public class PersonMapperDynamicSQLTest {
     @Test
     public void getPersonByConditionChoose() {
         PersonMapperDynamicSQL mapper = sqlSession.getMapper(PersonMapperDynamicSQL.class);
-        Person person = new Person(9, null, null, null);
+        Person person = new Person(9, "j", null, null);
         mapper.getPersonByConditionChoose(person).forEach(System.out::println);
     }
 
@@ -71,6 +71,20 @@ public class PersonMapperDynamicSQLTest {
     public void getPersonByConditionForeach() {
         PersonMapperDynamicSQL mapper = sqlSession.getMapper(PersonMapperDynamicSQL.class);
         mapper.getPersonByConditionForeach(Arrays.asList(1, 2, 3, 4, 5, 6)).forEach(System.out::println);
+    }
+
+    /**
+     * 测试foreach批量存储数据
+     */
+    @Test
+    public void addPersonsBatch() {
+        PersonMapperDynamicSQL mapper = sqlSession.getMapper(PersonMapperDynamicSQL.class);
+        List<Person> ps = new ArrayList<>();
+        ps.add(new Person(null, "smith", 66, "!@#$%^&*()_+"));
+        ps.add(new Person(null, "cotana", 444, "ASDFGHJKL"));
+        mapper.addPersonsBatch(ps);
+        sqlSession.commit();
+        sqlSession.close();
     }
 }
 
