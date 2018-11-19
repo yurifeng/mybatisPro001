@@ -12,6 +12,9 @@
     -->
     <cache eviction="FIFO" flushInterval="60000" readOnly="false" size="1024"/>
 
+    <!--ehcache二级缓存-->
+    <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>-->
+
     <!--单表映射resultMap(由于数据库列名和JavaBean属性不一致)-->
     <resultMap id="myDeptMap" type="department">
         <id column="id" property="id"/>
